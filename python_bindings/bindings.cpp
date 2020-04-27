@@ -355,6 +355,10 @@ public:
         appr_alg->markDelete(label);
     }
 
+    void unmarkDeleted(size_t label) {
+        appr_alg->unmarkDelete(label);
+    }
+
     void resizeIndex(size_t new_size) {
         appr_alg->resizeIndex(new_size);
     }
@@ -404,6 +408,7 @@ PYBIND11_PLUGIN(hnswlib) {
         .def("save_index", &Index<float>::saveIndex, py::arg("path_to_index"))
         .def("load_index", &Index<float>::loadIndex, py::arg("path_to_index"), py::arg("max_elements")=0)
         .def("mark_deleted", &Index<float>::markDeleted, py::arg("label"))
+        .def("unmark_deleted", &Index<float>::unmarkDeleted, py::arg("label"))
         .def("resize_index", &Index<float>::resizeIndex, py::arg("new_size"))
         .def("get_max_elements", &Index<float>::getMaxElements)
         .def("get_current_count", &Index<float>::getCurrentCount)

@@ -755,6 +755,19 @@ namespace hnswlib {
         }
 
         /**
+         * Unarks an element with the given label deleted.
+         * @param label
+         */
+        void unmarkDelete(labeltype label)
+        {
+            auto search = label_lookup_.find(label);
+            if (search == label_lookup_.end()) {
+                throw std::runtime_error("Label not found");
+            }
+            unmarkDeletedInternal(search->second);
+        }
+
+        /**
          * Uses the first 8 bits of the memory for the linked list to store the mark,
          * whereas maxM0_ has to be limited to the lower 24 bits, however, still large enough in almost all cases.
          * @param internalId
